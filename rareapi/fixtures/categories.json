@@ -1,0 +1,38 @@
+[
+    {
+        "model": "rareapi.category",
+        "pk": 1,
+        "fields": {
+            "label": "Sports"
+        }
+    },
+    {
+        "model": "rareapi.category",
+        "pk": 2,
+        "fields": {
+            "label": "Family"
+        }
+    },
+    {
+        "model": "rareapi.category",
+        "pk": 2,
+        "fields": {
+            "label": "Travel"
+        }
+    },
+    {
+        "model": "rareapi.category",
+        "pk": 2,
+        "fields": {
+            "label": "Role-playing game"
+        }
+    },
+    {
+        "model": "rareapi.category",
+        "pk": 2,
+        "fields": {
+            "label": "Role-playing game"
+        }
+    }
+ ]
+ 
