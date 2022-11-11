@@ -1,9 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Rare_User(models.Model):
-    user = models.ForeignKey(
-        "User", on_delete=models.CASCADE, related_name='rare_user_user')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     active = models.BooleanField()
     profile_image_url = models.CharField(max_length=250)
     created_on = models.DateField()
