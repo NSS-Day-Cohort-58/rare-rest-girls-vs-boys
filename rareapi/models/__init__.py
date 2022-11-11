@@ -3,6 +3,3 @@ from .comment import Comment
 from .posts import Post
 from .tag import Tag
 from .category import Category
-<< << << < HEAD
-== == == =
->>>>>> > main
