@@ -15,14 +15,14 @@
     },
     {
         "model": "rareapi.category",
-        "pk": 2,
+        "pk": 3,
         "fields": {
             "label": "Travel"
         }
     },
     {
         "model": "rareapi.category",
-        "pk": 2,
+        "pk": 4,
         "fields": {
             "label": "News"
         }
