@@ -5,5 +5,4 @@
         "--load-plugins=pylint_django",
         "--django-settings-module=rare.settings",
     ]
-    
 }

@@ -1,0 +1,38 @@
+[
+    {
+        "model": "rareapi.posts",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "category": 2,
+            "title": "Dogs are the next SSRI",
+            "publication_date": "2022-10-20",
+            "image_url": "https://www.cesarsway.com/wp-content/uploads/2018/01/5-ways-to-keep-your-dog-happy-and-healthy.jpg.webp",
+            "content": "We love dogs. They make you happy. Petting a dog will increase your serotonin levels. Get yourself a pup. But only if you're responsible and will take proper care of your furry friend. They need you just like you need them."
+        }
+    },
+    {
+        "model": "rareapi.posts",
+        "pk": 2,
+        "fields": {
+            "user": 1,
+            "category": 3,
+            "title": "French Polynesia: the next big thing!",
+            "publication_date": "2022-11-10",
+            "image_url": "https://dynaimage.cdn.cnn.com/cnn/q_auto,w_1100,c_fill,g_auto,h_619,ar_16:9/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F221108214629-french-polynesia-tahiti-tourism-cap.jpg",
+            "content": "So many tourists. But in a good way! This place is so cool. You should go there on your next vacay."
+        }
+    },
+    {
+        "model": "rareapi.posts",
+        "pk": 3,
+        "fields": {
+            "user": 1,
+            "category": 3,
+            "title": "Pickleball, a sport for all!",
+            "publication_date": "2022-10-29",
+            "image_url": "https://static01.nyt.com/images/2022/02/20/fashion/PICKLEBALL5/PICKLEBALL5-mediumSquareAt3X.jpg",
+            "content": "Everyone can play pickleball. It's really fun, way more fun than tennis. Because you don't have to run that much."
+        }
+    }
+]
