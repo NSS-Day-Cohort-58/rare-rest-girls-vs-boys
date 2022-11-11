@@ -24,14 +24,7 @@
         "model": "rareapi.category",
         "pk": 2,
         "fields": {
-            "label": "Role-playing game"
-        }
-    },
-    {
-        "model": "rareapi.category",
-        "pk": 2,
-        "fields": {
-            "label": "Role-playing game"
+            "label": "News"
         }
     }
  ]
