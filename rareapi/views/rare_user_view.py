@@ -5,6 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rareapi.models import Post
 from rareapi.models import Rare_User
+from django.contrib.auth.models import User
 
 
 class RareUserView(ViewSet):
@@ -40,7 +41,16 @@ class RareUserView(ViewSet):
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'last_name',
+                  'username', 'email', 'is_staff')
+
+
 class RareUserSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(many=False)
 
     class Meta:
         model = Post
