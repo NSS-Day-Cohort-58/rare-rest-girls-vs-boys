@@ -40,6 +40,19 @@ class CommentView(ViewSet):
         comment.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
+    def update(self, request, pk):
+        """handles PUT request to comments"""
+
+        comment = comment.objects.get(pk=pk)
+        comment.post = post.objects.get(pk=request.data["post"])
+        comment.author = author.objects.get(pk=request.data["author"])
+        comment.content = request.data["content"]
+        comment.created_on = request.data["createdOn"]
+       
+        comment.save()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
 
 class CommentSerializer(serializers.ModelSerializer):
 
