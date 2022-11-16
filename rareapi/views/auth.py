@@ -65,7 +65,6 @@ def register_user(request):
         active=True,
         profile_image_url=request.data['profile_image_url'],
         created_on=date.today()
-
     )
 
     # Use the REST Framework's token generator on the new user account
