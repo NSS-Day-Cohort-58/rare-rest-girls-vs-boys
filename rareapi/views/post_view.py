@@ -4,6 +4,7 @@ from rest_framework import serializers, status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rareapi.models import Post, Rare_User, Category
+from django.contrib.auth.models import User
 
 
 class PostView(ViewSet):
@@ -68,7 +69,25 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'category', 'title',
                   'publication_date', 'image_url', 'content')
 
+class RareUserSerializer(serializers.ModelSerializer):
+    class Meta:
+
+        model = Rare_User
+        fields = ('id', 'user', 'active', 'profile_image_url',
+                  'created_on', 'bio', 'full_name', 'username', 'email')
+
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ('id', 'label')
+
+
 class PostSerializer(serializers.ModelSerializer):
+
+    user = RareUserSerializer(many=False)
+    category = CategorySerializer(many=False)
 
     class Meta:
         model = Post
