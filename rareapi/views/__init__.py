@@ -5,3 +5,4 @@ from .rare_user_view import RareUserView
 from .tag_views import TagView
 from .auth import register_user
 from .auth import login_user
+from .subscription_view import SubscriptionView
