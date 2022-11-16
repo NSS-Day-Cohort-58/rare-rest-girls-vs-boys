@@ -19,6 +19,7 @@ class RareUserView(ViewSet):
     def list(self, request):
 
         rare_users = Rare_User.objects.all()
+
         serializer = RareUserSerializer(rare_users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
