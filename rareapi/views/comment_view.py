@@ -24,11 +24,12 @@ class CommentView(ViewSet):
     def create(self, request):
 
         assigned_post = Post.objects.get(pk=request.data["post"])
+        author = Rare_User.objects.get(user=request.auth.user)
 
         comment = Comment()
         comment.content = request.data["content"]
         comment.created_on = date.today()
-        comment.author = request.auth.user
+        comment.author = author
         comment.post = assigned_post
         comment.save()
 
