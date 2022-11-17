@@ -20,16 +20,17 @@ class PostView(ViewSet):
         posts = []
 
         if 'status' in request.query_params:
+            
+            rare_user = Rare_User.objects.get(user=request.auth.user)
+
             if request.query_params['status'] == "created":
-                posts = Post.objects.filter(user=request.auth.user)
+                posts = Post.objects.filter(user=rare_user.id)
 
             if request.query_params['status'] == "subscribed":
-
-                rare_user = Rare_User.objects.get(user=request.auth.user)
-                subscriptions = Subscription.objects.filter(follower_id=rare_user['id'])
+                subscriptions = Subscription.objects.filter(follower=rare_user.id)
                 
                 for subscription in subscriptions:
-                    author_posts = Post.objects.filter(user=subscription.author_id)
+                    author_posts = Post.objects.filter(user=subscription.author)
                     posts.extend(author_posts)
         else:
             posts = Post.objects.all()

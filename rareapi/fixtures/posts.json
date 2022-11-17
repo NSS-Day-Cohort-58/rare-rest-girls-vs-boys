@@ -15,7 +15,7 @@
         "model": "rareapi.post",
         "pk": 2,
         "fields": {
-            "user": 1,
+            "user": 2,
             "category": 3,
             "title": "French Polynesia: the next big thing!",
             "publication_date": "2022-11-10",
