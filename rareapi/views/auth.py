@@ -27,16 +27,14 @@ def login_user(request):
     # If authentication was successful, respond with their token
     if authenticated_user is not None:
         token = Token.objects.get(user=authenticated_user)
-        rare_user = Rare_User.objects.get(user=request.auth.user)
+   
         
 
         data = {
             'valid': True,
             'token': token.key, 
-            'rare_user': rare_user["id"]
             
-
-            
+    
             
         }
         return Response(data)
