@@ -3,7 +3,7 @@ from django.http import HttpResponseServerError
 from rest_framework import serializers, status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
-from rareapi.models import Post, Rare_User, Category
+from rareapi.models import Post, Rare_User, Category, Subscription
 from django.contrib.auth.models import User
 
 
@@ -25,7 +25,8 @@ class PostView(ViewSet):
 
             if request.query_params['status'] == "subscribed":
 
-                subscriptions = Subscription.objects.filter(follower_id=request.auth.user)
+                rare_user = Rare_User.objects.get(user=request.auth.user)
+                subscriptions = Subscription.objects.filter(follower_id=rare_user['id'])
                 
                 for subscription in subscriptions:
                     author_posts = Post.objects.filter(user=subscription.author_id)
