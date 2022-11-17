@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 
 class Rare_User(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='user_rare_user')
     active = models.BooleanField()
     profile_image_url = models.CharField(max_length=250)
     created_on = models.DateField()
@@ -20,3 +21,7 @@ class Rare_User(models.Model):
     @property
     def email(self):
         return f'{self.user.email}'
+
+    @property
+    def is_staff(self):
+        return f'{self.user.is_staff}'

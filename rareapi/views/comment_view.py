@@ -3,8 +3,8 @@ from django.http import HttpResponseServerError
 from rest_framework import serializers, status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
-from rareapi.models import Comment
-from rareapi.models import Post
+from rareapi.models import Comment, Post, Rare_User
+
 
 
 class CommentView(ViewSet):
@@ -24,11 +24,12 @@ class CommentView(ViewSet):
     def create(self, request):
 
         assigned_post = Post.objects.get(pk=request.data["post"])
+        author = Rare_User.objects.get(user=request.auth.user)
 
         comment = Comment()
         comment.content = request.data["content"]
         comment.created_on = date.today()
-        comment.author = request.auth.user
+        comment.author = author
         comment.post = assigned_post
         comment.save()
 
@@ -38,6 +39,19 @@ class CommentView(ViewSet):
     def destroy(self, request, pk):
         comment = Comment.objects.get(pk=pk)
         comment.delete()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+    def update(self, request, pk):
+        """handles PUT request to comments"""
+
+        comment = Comment.objects.get(pk=pk)
+        comment.post = Post.objects.get(pk=request.data["post"])
+        comment.author = Rare_User.objects.get(pk=request.data["author"])
+        comment.content = request.data["content"]
+        comment.created_on = request.data["createdOn"]
+       
+        comment.save()
+
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 

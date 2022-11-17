@@ -19,6 +19,7 @@ class RareUserView(ViewSet):
     def list(self, request):
 
         rare_users = Rare_User.objects.all()
+
         serializer = RareUserSerializer(rare_users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -39,6 +40,8 @@ class RareUserView(ViewSet):
         rare_user = Rare_User.objects.get(pk=pk)
         rare_user.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+    
 
 
 class RareUserSerializer(serializers.ModelSerializer):
