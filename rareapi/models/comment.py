@@ -8,3 +8,12 @@ class Comment(models.Model):
         "Rare_User", on_delete=models.CASCADE, related_name='user_comments')
     content = models.CharField(max_length=250)
     created_on = models.DateField()
+
+
+    @property
+    def created(self):
+        return self.__created
+
+    @created.setter
+    def created(self, value):
+        self.__created = value
