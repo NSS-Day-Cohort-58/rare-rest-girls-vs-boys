@@ -37,5 +37,5 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Subscription
-        fields = ('id', 'author', 'follower', 'create_on',
+        fields = ('id', 'author', 'follower', 'created_on',
                   'ended_on')
