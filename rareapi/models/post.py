@@ -10,3 +10,5 @@ class Post(models.Model):
     publication_date = models.DateField()
     image_url = models.CharField(max_length=250)
     content = models.CharField(max_length=250)
+    approved = models.BooleanField(default=False)
+    tags = models.ManyToManyField('Tag', through='PostTag')
