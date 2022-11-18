@@ -3,8 +3,9 @@ from django.http import HttpResponseServerError
 from rest_framework import serializers, status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
-from rareapi.models import Post, Rare_User, Category, Subscription
+from rareapi.models import Post, Rare_User, Category, Subscription, Tag
 from django.contrib.auth.models import User
+from rest_framework.decorators import action
 
 
 class PostView(ViewSet):
@@ -40,17 +41,34 @@ class PostView(ViewSet):
 
     def create(self, request):
 
+
         post = Post()
-        post.user = request.auth.user
-        post.category = request.data["category"]
+        post.user = Rare_User.objects.get(user=request.auth.user)
+        post.category = Category.objects.get(pk=request.data["category_id"])
         post.title = request.data["title"]
         post.publication_date = date.today()
         post.image_url = request.data["image_url"]
         post.content = request.data["content"]
+
+        if request.auth.user.is_staff:
+            post.approved=True
+        else:
+            post.approved=False
+
         post.save()
 
         serializer = PostSerializer(post)
         return Response(serializer.data)
+
+
+    @action(methods=['post'], detail=True)
+    def addTag(self, request, pk):
+    
+        tag = Tag.objects.get(pk=request.data["tag_id"])
+        post = Post.objects.get(pk=request.data["post_id"])
+        post.tags.add(tag)
+
+        return Response({'message': 'Tag added'}, status=status.HTTP_201_CREATED)
 
     def destroy(self, request, pk):
         post = Post.objects.get(pk=pk)
@@ -85,13 +103,19 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('id', 'label')
 
+class PostTagSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tag
+        fields = ('id', 'label')
 
 class PostSerializer(serializers.ModelSerializer):
 
     user = RareUserSerializer(many=False)
     category = CategorySerializer(many=False)
+    tags = PostTagSerializer(many=True)
 
     class Meta:
         model = Post
         fields = ('id', 'user', 'category', 'title',
-                  'publication_date', 'image_url', 'content')
+                  'publication_date', 'image_url', 'content', 'tags')
