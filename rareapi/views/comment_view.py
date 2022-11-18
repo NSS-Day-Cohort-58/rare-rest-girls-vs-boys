@@ -16,8 +16,27 @@ class CommentView(ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def list(self, request):
+        logged_in_user = Rare_User.objects.get(user=request.auth.user)
+        logged_user_id = logged_in_user.pk
 
-        comments = Comment.objects.all()
+
+        if "post" in request.query_params:
+            post_id = request.query_params["post"]
+            comments = Comment.objects.filter(post=post_id) #comments is all the comments for that post
+        
+        else:
+
+            comments = Comment.objects.all()
+
+    
+        for comment in comments:
+             if logged_user_id == comment.author_id:
+                 comment.created = True 
+             else:
+                 comment.created = False
+            
+                    
+
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -56,8 +75,8 @@ class CommentView(ViewSet):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-
+        
     class Meta:
         model = Comment
         fields = ('id', 'author', 'post', 'content',
-                  'created_on')
+                  'created_on', 'created')
