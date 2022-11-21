@@ -25,3 +25,19 @@ class Rare_User(models.Model):
     @property
     def is_staff(self):
         return f'{self.user.is_staff}'
+
+    @property
+    def my_profile(self):
+        return self.__my_profile
+
+    @my_profile.setter
+    def my_profile(self, value):
+        self.__my_profile = value
+
+    @property
+    def sub_info(self):
+        return self.__sub_info
+
+    @sub_info.setter
+    def sub_info(self, value):
+        self.__sub_info = value
