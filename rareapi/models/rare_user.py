@@ -35,9 +35,9 @@ class Rare_User(models.Model):
         self.__my_profile = value
 
     @property
-    def is_subscribed(self):
-        return self.__is_subscribed
+    def sub_info(self):
+        return self.__sub_info
 
-    @is_subscribed.setter
-    def is_subscribed(self, value):
-        self.__is_subscribed = value
+    @sub_info.setter
+    def sub_info(self, value):
+        self.__sub_info = value

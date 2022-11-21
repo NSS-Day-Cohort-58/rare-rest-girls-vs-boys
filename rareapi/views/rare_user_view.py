@@ -21,12 +21,19 @@ class RareUserView(ViewSet):
         else:
             rare_user.my_profile = False
 
-        subs = Subscription.objects.get(
-            follower=logged_in_user.pk, author=rare_user.pk)
-        if len(subs) > 0:
-            rare_user.is_subscribed = True
-        else:
-            rare_user.is_subscribed = False
+        try:
+            sub = Subscription.objects.get(
+                follower=logged_in_user.pk, author=rare_user.pk, ended_on=None)
+            rare_user.sub_info = {
+                "is_subscribed": True,
+                "subscription": sub.id
+            }
+
+        except Subscription.DoesNotExist:
+            rare_user.sub_info = {
+                "is_subscribed": False,
+                "subscription": None
+            }
 
         serializer = RareUserSerializer(rare_user)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -63,4 +70,4 @@ class RareUserSerializer(serializers.ModelSerializer):
         model = Rare_User
         fields = ('id', 'user', 'active', 'profile_image_url',
                   'created_on', 'bio', 'full_name', 'username',
-                  'email', 'is_staff', 'my_profile', 'is_subscribed')
+                  'email', 'is_staff', 'my_profile', 'sub_info')
